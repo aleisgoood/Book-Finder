@@ -1,5 +1,5 @@
 <div align="center" id="top"> 
-  <img src="./.github/app.gif" alt="Learn Webpack" />
+  <img src="./.github/app.gif" alt="BookFinder" />
 
   &#xa0;
 
