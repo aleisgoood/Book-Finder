@@ -52,10 +52,7 @@ h1 {
     margin-top: 0;
     font-family: 'Ephesis', cursive;
     font-size: 70px;
-}
-
-h2 {
-    font-size: 25px;
+    float: left;
 }
 
 .container {
@@ -67,10 +64,9 @@ h2 {
 }
 
 #results {
-    margin-top: 20px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .book {
@@ -82,6 +78,7 @@ h2 {
     cursor: pointer;
     background-color: white;
     border-style: double;
+    
 }
 
 #descriptionContainer {
@@ -93,28 +90,20 @@ h2 {
     border-style: double;
     background-color: white;
     padding: 50px;
-    margin-bottom: 50px;
+   
 }
 
 .search-container {
     display: flex;
-    margin-bottom: 20px; 
-}
-
-.footer {
-    background-color: #812424;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    padding: 10px;
+    flex-direction: column;
+    margin-bottom: 20px;
 }
 
 #searchInput {
     flex: 1;
     padding: 10px;
     font-size: 16px;
-    margin-right: 5px; 
+    margin-bottom: 10px;
 }
 
 #searchButton,
@@ -122,7 +111,7 @@ h2 {
     padding: 10px;
     font-size: 16px;
     cursor: pointer;
-    border-radius: 10%;
+    border-radius: 5px;
 }
 
 #searchButton {
@@ -132,7 +121,76 @@ h2 {
 }
 
 #resetButton {
-    background-color:transparent;
+    background-color: transparent;
     color: #f2f2f2;
     border: 1px solid white;
+}
+
+@media screen and (max-width: 768px) {
+
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background-image: url(../assets/img/lady.avif);
+        background-repeat: repeat;
+        background-size: cover;
+        background-attachment: fixed;
+    }
+
+    .navbar {
+        flex-direction: row;
+        align-items: center;
+        display: block;
+
+    }
+
+    #results{
+        margin-top: 40px;
+    }
+
+    .navbar a {
+        float: none;
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 5px;
+    }
+
+    .navbar-title {
+        float: right;
+        text-align: center;
+    }
+
+    .container {
+        text-align: center;
+        padding: 60px 16px 60px; /* Adjusted padding */
+        display: flex;
+        flex-direction: column;
+    }
+
+    .book {
+        flex-basis: 100%;
+        
+    }
+
+    #descriptionContainer {
+        padding: 0;
+    }
+
+    .book-description {
+        padding: 30px;
+    }
+
+    .search-container {
+        flex-direction: column;
+    }
+
+    #searchInput {
+        margin-bottom: 10px;
+    }
 }
