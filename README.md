@@ -19,11 +19,6 @@
 
 This is a simple website called BookFinder: it allows the user to search for their preferred genres of books; the website fetches APIs from the <a href= "https://openlibrary.org/" target= "blank"> Open Library Website</a> and returns a list of books, with the author(s) and name of the work.
 
-## :sparkles: Features ##
-
-:heavy_check_mark: Feature 1;\
-:heavy_check_mark: Feature 2;\
-:heavy_check_mark: Feature 3;
 
 ## :rocket: Technologies ##
 
