@@ -1,5 +1,5 @@
 @media screen and (max-width: 768px) {
- 
+
     body::before {
         content: "";
         position: fixed;
@@ -11,44 +11,43 @@
         background-image: url(../assets/img/lady.avif);
         background-repeat: repeat;
         background-size: cover;
-        background-attachment: fixed; 
+        background-attachment: fixed;
     }
-    
 
     .navbar a {
-        float: none; 
+        float: none;
         display: block;
-        width: 100%; 
+        width: 100%;
         text-align: center;
     }
 
     .navbar-title {
-        float: none; 
+        float: none;
         text-align: center;
     }
 
     .container {
-        padding: 30px; 
+        padding: 30px;
     }
 
 
     .book {
-        flex-basis: 100%; 
+        flex-basis: 100%;
     }
 
     #descriptionContainer {
-        padding: 0; 
+        padding: 0;
     }
 
     .book-description {
-        padding: 30px; 
+        padding: 30px;
     }
 
     .search-container {
-        flex-direction: column; 
+        flex-direction: column;
     }
 
     #searchInput {
-        margin-right: 0; 
+        margin-right: 0;
     }
 }
