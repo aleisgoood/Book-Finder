@@ -51,8 +51,9 @@ $ yarn start
 
 
 
-Made with :heart: by <a href="https://github.com/aleisgoood" target="_blank">Aleisgoood.</a>
-
+Made with :heart: by <a href="https://github.com/aleisgoood" target="_blank">Aleisgoood.</a> 
+<br>
+You can try the website here: <a href ="https://aleisgoood.github.io/Book-Finder/" target="_blank">GitHubPages</a>
 &#xa0;
 
 <a href="#top">Back to top</a>
