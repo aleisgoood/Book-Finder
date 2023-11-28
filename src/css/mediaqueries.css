@@ -1,0 +1,54 @@
+@media screen and (max-width: 768px) {
+ 
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background-image: url(../assets/img/lady.avif);
+        background-repeat: repeat;
+        background-size: cover;
+        background-attachment: fixed; 
+    }
+    
+
+    .navbar a {
+        float: none; 
+        display: block;
+        width: 100%; 
+        text-align: center;
+    }
+
+    .navbar-title {
+        float: none; 
+        text-align: center;
+    }
+
+    .container {
+        padding: 30px; 
+    }
+
+
+    .book {
+        flex-basis: 100%; 
+    }
+
+    #descriptionContainer {
+        padding: 0; 
+    }
+
+    .book-description {
+        padding: 30px; 
+    }
+
+    .search-container {
+        flex-direction: column; 
+    }
+
+    #searchInput {
+        margin-right: 0; 
+    }
+}
