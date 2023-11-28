@@ -2,12 +2,15 @@ function searchBooks() {
   const searchInput = document.getElementById('searchInput').value.toLowerCase();
   const resultsContainer = document.getElementById('results');
   const descriptionContainer = document.getElementById('descriptionContainer');
+  const h1Elem = document.querySelector('h1');
   
-  resultsContainer.innerHTML = '';
+  //make h1 disappear after loading the results
+  h1Elem.style.display = 'none';
+
+//clear
+resultsContainer.innerHTML = '';
   descriptionContainer.innerHTML = '';
-
-
-
+  
   fetch(`https://openlibrary.org/subjects/${searchInput}.json`)
     .then(response => {
       if (!response.ok) {
@@ -26,10 +29,6 @@ function searchBooks() {
         bookElement.textContent = `Title: ${work.title}, Authors: ${work.authors.map(author => `${author.name}`).join(', ')}`;
         bookElement.addEventListener('click', () => {
           getBookDescription(work.key);
-
-          // Hide the search input and button
-          searchInputElem.style.display = 'none';
-          searchButtonElem.style.display = 'none';
         });
         resultsContainer.appendChild(bookElement);
       });
@@ -37,8 +36,10 @@ function searchBooks() {
     .catch(error => {
       console.error('Error:', error.message);
       resultsContainer.innerHTML = `<p>Error: ${error.message}</p>`;
-    });
+    })
+
 }
+
 //resets the page
 function resetPage() {
   const searchInputElem = document.getElementById('searchInput');
@@ -46,11 +47,7 @@ function resetPage() {
   searchInputElem.style.display = 'block';
   searchButtonElem.style.display = 'block';
 
-  //  h1 element
-  const h1Elem = document.querySelector('h1');
-  h1Elem.style.display = 'block';
-
-  // Clear description container
+  //clear container
   const descriptionContainer = document.getElementById('descriptionContainer');
   descriptionContainer.innerHTML = '';
 
@@ -82,9 +79,8 @@ function getBookDescription(bookKey) {
       descriptionDiv.innerHTML = `<p>Synopsis:</p><p>${book.description}</p>`;
 
       descriptionContainer.innerHTML = '';
-
       descriptionContainer.appendChild(descriptionDiv);
-
+      
     })
     .catch(error => {
       console.error('Error:', error.message);
