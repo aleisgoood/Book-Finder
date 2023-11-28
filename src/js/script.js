@@ -80,7 +80,7 @@ function getBookDescription(bookKey) {
 }
 
 
-//refresh the page
+//refreshes the page
 function resetPage() {
   const searchInputElem = document.getElementById('searchInput');
   const searchButtonElem = document.getElementById('searchButton');
@@ -94,7 +94,7 @@ function resetPage() {
   // Clear results 
   const resultsContainer = document.getElementById('results');
   resultsContainer.innerHTML = ''; const h1Elem = document.querySelector('h1');
-  
+
   // Show h1 
   h1Elem.style.display = 'block';
 }
