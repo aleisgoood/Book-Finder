@@ -62,21 +62,9 @@ h2 {
 .container {
     text-align: center;
     padding: 60px 16px 16px;
-}
-
-#searchInput {
-    padding: 10px;
-    font-size: 16px;
-}
-
-
-
-#searchButton {
-    padding: 10px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 10%;
-    background-color: rgba(44, 93, 206, 0.812);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #results {
@@ -99,11 +87,71 @@ h2 {
 
 #descriptionContainer {
     margin-top: 20px;
-    padding: 0 20px;
+    padding: 0px 20px;
 }
 
 .book-description {
     border-style: double;
     background-color: #ddd;
     padding: 50px;
+    margin-bottom: 50px;
+}
+
+.search-container {
+    display: flex;
+    margin-bottom: 20px; /* Adjust margin as needed */
+}
+
+.footer {
+    background-color: #812424;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+}
+
+#searchInput {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 10%;
+    margin-right: 5px; 
+}
+
+#searchButton,
+#resetButton {
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 10%;
+}
+
+#searchButton {
+    background-color: rgba(44, 93, 206, 0.812);
+    color: #f2f2f2;
+    border: none;
+}
+
+#resetButton {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #000;
+}
+
+
+/* Add a loading spinner */
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top: 4px solid #3498db;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
