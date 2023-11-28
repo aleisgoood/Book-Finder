@@ -8,7 +8,7 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-image: url(../assets/img/blog-9.28.png);
+    background-image: url(../assets/img/lady.avif);
     background-repeat: repeat;
     background-size: cover;
 }
@@ -45,7 +45,6 @@ body {
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
-    font-size: 35px;
     font-family: 'Ephesis', cursive;
 }
 
@@ -99,7 +98,7 @@ h2 {
 
 .search-container {
     display: flex;
-    margin-bottom: 20px; /* Adjust margin as needed */
+    margin-bottom: 20px; 
 }
 
 .footer {
@@ -115,7 +114,6 @@ h2 {
     flex: 1;
     padding: 10px;
     font-size: 16px;
-    border-radius: 10%;
     margin-right: 5px; 
 }
 
@@ -128,13 +126,13 @@ h2 {
 }
 
 #searchButton {
-    background-color: rgba(44, 93, 206, 0.812);
+    background-color: rgb(23, 110, 84);
     color: #f2f2f2;
-    border: none;
+    border: 1px solid #000;
 }
 
 #resetButton {
-    background-color: #fff;
-    color: #000;
-    border: 1px solid #000;
+    background-color:transparent;
+    color: #f2f2f2;
+    border: 1px solid white;
 }
