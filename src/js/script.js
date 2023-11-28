@@ -32,8 +32,6 @@ function searchBooks() {
         const bookElement = document.createElement('div');
         bookElement.classList.add('book');
         bookElement.textContent = `Title: ${work.title}, Authors: ${work.authors.map(author => `${author.name}`).join(', ')}`;
-
-
         bookElement.addEventListener('click', () => {
           getBookDescription(work.key);
         });
@@ -48,7 +46,6 @@ function searchBooks() {
 }
 
 //gets book description -appends div
-
 function getBookDescription(bookKey) {
   const descriptionContainer = document.getElementById('descriptionContainer');
   const h1Elem = document.querySelector('h1');
@@ -95,7 +92,6 @@ function resetPage() {
   const resultsContainer = document.getElementById('results');
   resultsContainer.innerHTML = ''; const h1Elem = document.querySelector('h1');
 
-  // Show h1 
   h1Elem.style.display = 'block';
 }
 
