@@ -6,14 +6,8 @@ function searchBooks() {
   const searchInputElem = document.getElementById('searchInput');
   const searchButtonElem = document.getElementById('searchButton');
 
-  //make h1 disappear after loading the results of the search
+  //no h1 after loading the results of the search
   h1Elem.style.display = 'none';
-  //clear button - search input
-  searchInputElem.style.display = 'none';
-  searchButtonElem.style.display = 'none';
-  //clear containers
-  resultsContainer.innerHTML = '';
-  descriptionContainer.innerHTML = '';
 
   fetch(`https://openlibrary.org/subjects/${searchInput}.json`)
     .then(response => {
@@ -42,7 +36,12 @@ function searchBooks() {
       console.error('Error:', error.message);
       resultsContainer.innerHTML = `<p>Error: ${error.message}</p>`;
     })
-
+  //clear button - search input
+  searchInputElem.style.display = 'none';
+  searchButtonElem.style.display = 'none';
+  //empty containers
+  resultsContainer.innerHTML = '';
+  descriptionContainer.innerHTML = '';
 }
 
 //gets book description -appends div
@@ -90,7 +89,7 @@ function resetPage() {
 
   // Clear results 
   const resultsContainer = document.getElementById('results');
-  resultsContainer.innerHTML = ''; const h1Elem = document.querySelector('h1');
+  resultsContainer.innerHTML = ''; 
 
   h1Elem.style.display = 'block';
 }
