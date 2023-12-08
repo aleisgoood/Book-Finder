@@ -99,9 +99,8 @@ function resetPage() {
     // Clear containers / results
     const descriptionContainer = document.getElementById('descriptionContainer');
     descriptionContainer.innerHTML = '';
-
+    
     const resultsContainer = document.getElementById('results');
     resultsContainer.innerHTML = '';
-
     h1Elem.style.display = 'block';
 }
