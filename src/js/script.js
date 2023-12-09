@@ -1,6 +1,7 @@
 // Fetch books
 function fetchBooks(searchInput) {
-    return fetch(`https://openlibrary.org/subjects/${searchInput}.json`)
+    const api = `https://openlibrary.org/subjects/${searchInput}.json`;
+    return fetch(api)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Category not found. Please check your spelling and try again.');
@@ -9,20 +10,18 @@ function fetchBooks(searchInput) {
         });
 }
 
-// Render one book
-function renderBook(work) {
-    const bookElement = document.createElement('div');
-    bookElement.classList.add('book');
-    bookElement.textContent = `Title: ${work.title}, Authors: ${work.authors.map(author => `${author.name}`).join(', ')}`;
-    bookElement.addEventListener('click', () => {
-        getBookDescription(work.key);
-    });
-    return bookElement;
+// Render book elem
+function renderBookElem(work, onClickHandler) {
+    const bookElem = document.createElement('div');
+    bookElem.classList.add('book');
+    bookElem.textContent = `Title: ${work.title}, Authors: ${work.authors.map(author => `${author.name}`).join(', ')}`;
+    bookElem.addEventListener('click', onClickHandler);
+    return bookElem;
 }
-
-function handleBookFetchError(error, resultsContainer) {
+// error handling
+function handleError(error, container) {
     console.error('Error:', error.message);
-    resultsContainer.innerHTML = `<p>Error: ${error.message}</p>`;
+    container.innerHTML = `<p>Error: ${error.message}</p>`;
 }
 
 // Search books
@@ -35,19 +34,23 @@ function searchBooks() {
     const h1Elem = document.querySelector('h1');
     h1Elem.style.display = 'none';
 
+    const displayBooks = (works) => {
+        works.forEach(work => {
+            const bookElement = renderBookElem(work, () => getBookDescription(work.key));
+            resultsContainer.appendChild(bookElement);
+        });
+    };
+
     fetchBooks(searchInput)
         .then(data => {
             if (!data.works || data.works.length === 0) {
                 throw new Error('No books found for the given category. Please try again.');
             }
 
-            data.works.forEach(work => {
-                const bookElement = renderBook(work);
-                resultsContainer.appendChild(bookElement);
-            });
+            displayBooks(data.works);
         })
         .catch(error => {
-            handleBookFetchError(error, resultsContainer);
+            handleError(error, resultsContainer);
         });
 
     // Clear buttons / empty containers 
@@ -57,13 +60,15 @@ function searchBooks() {
     descriptionContainer.innerHTML = '';
 }
 
-// Displaying description
+// Get book description
 function getBookDescription(bookKey) {
     const descriptionContainer = document.getElementById('descriptionContainer');
     const h1Elem = document.querySelector('h1');
     h1Elem.style.display = 'none';
 
-    fetch(`https://openlibrary.org${bookKey}.json`)
+    const api = `https://openlibrary.org${bookKey}.json`;
+
+    fetch(api)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Book not found. Please check your spelling and try again.');
@@ -71,24 +76,24 @@ function getBookDescription(bookKey) {
             return response.json();
         })
         .then(book => {
-            const descriptionDiv = createDescriptionDiv(book);
+            const descriptionDiv = createDesDiv(book);
             descriptionContainer.innerHTML = '';
             descriptionContainer.appendChild(descriptionDiv);
         })
         .catch(error => {
-            handleBookFetchError(error, descriptionContainer);
+            handleError(error, descriptionContainer);
         });
 }
 
-// Creating description div
-function createDescriptionDiv(book) {
+// description div
+function createDesDiv(book) {
     const descriptionDiv = document.createElement('div');
     descriptionDiv.classList.add('book-description');
     descriptionDiv.innerHTML = `<p>Synopsis:</p><p>${book.description}</p>`;
     return descriptionDiv;
 }
 
-// Reset / Refresh
+// Reset / Refresh the page
 function resetPage() {
     const searchInputElem = document.getElementById('searchInput');
     const searchButtonElem = document.getElementById('searchButton');
@@ -99,7 +104,7 @@ function resetPage() {
     // Clear containers / results
     const descriptionContainer = document.getElementById('descriptionContainer');
     descriptionContainer.innerHTML = '';
-    
+
     const resultsContainer = document.getElementById('results');
     resultsContainer.innerHTML = '';
     h1Elem.style.display = 'block';
