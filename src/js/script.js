@@ -1,7 +1,8 @@
-// Fetch books
+// Fetch books 
 function fetchBooks(searchInput) {
-    const api = `https://openlibrary.org/subjects/${searchInput}.json`;
-    return fetch(api)
+    const apiUrl = `https://openlibrary.org/subjects/${searchInput}.json`;
+
+    return fetch(apiUrl)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Category not found. Please check your spelling and try again.');
@@ -10,21 +11,28 @@ function fetchBooks(searchInput) {
         });
 }
 
-// Render book elem
-function renderBookElem(work, onClickHandler) {
+// Create one book element
+function createBookElem(work, onClickHandler) {
     const bookElem = document.createElement('div');
     bookElem.classList.add('book');
     bookElem.textContent = `Title: ${work.title}, Authors: ${work.authors.map(author => `${author.name}`).join(', ')}`;
     bookElem.addEventListener('click', onClickHandler);
     return bookElem;
 }
-// error handling
-function handleError(error, container) {
+function ErrorMessage(error, container) {
     console.error('Error:', error.message);
     container.innerHTML = `<p>Error: ${error.message}</p>`;
 }
 
-// Search books
+// Display books 
+function displayBooks(works, resultsContainer) {
+    works.forEach(work => {
+        const bookElem = createBookElem(work, () => BookDescription(work.key));
+        resultsContainer.appendChild(bookElem);
+    });
+}
+
+// Search books 
 function searchBooks() {
     const searchInput = document.getElementById('searchInput').value.toLowerCase();
     const resultsContainer = document.getElementById('results');
@@ -34,23 +42,16 @@ function searchBooks() {
     const h1Elem = document.querySelector('h1');
     h1Elem.style.display = 'none';
 
-    const displayBooks = (works) => {
-        works.forEach(work => {
-            const bookElement = renderBookElem(work, () => getBookDescription(work.key));
-            resultsContainer.appendChild(bookElement);
-        });
-    };
-
     fetchBooks(searchInput)
         .then(data => {
             if (!data.works || data.works.length === 0) {
                 throw new Error('No books found for the given category. Please try again.');
             }
 
-            displayBooks(data.works);
+            displayBooks(data.works, resultsContainer);
         })
         .catch(error => {
-            handleError(error, resultsContainer);
+            ErrorMessage(error, resultsContainer);
         });
 
     // Clear buttons / empty containers 
@@ -60,15 +61,15 @@ function searchBooks() {
     descriptionContainer.innerHTML = '';
 }
 
-// Get book description
-function getBookDescription(bookKey) {
+// book descriptions / display them
+function BookDescription(bookKey) {
     const descriptionContainer = document.getElementById('descriptionContainer');
     const h1Elem = document.querySelector('h1');
     h1Elem.style.display = 'none';
 
-    const api = `https://openlibrary.org${bookKey}.json`;
+    const apiUrl = `https://openlibrary.org${bookKey}.json`;
 
-    fetch(api)
+    fetch(apiUrl)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Book not found. Please check your spelling and try again.');
@@ -76,17 +77,17 @@ function getBookDescription(bookKey) {
             return response.json();
         })
         .then(book => {
-            const descriptionDiv = createDesDiv(book);
+            const descriptionDiv = createDiv(book);
             descriptionContainer.innerHTML = '';
             descriptionContainer.appendChild(descriptionDiv);
         })
         .catch(error => {
-            handleError(error, descriptionContainer);
+            ErrorMessage(error, descriptionContainer);
         });
 }
 
-// description div
-function createDesDiv(book) {
+// Create description div
+function createDiv(book) {
     const descriptionDiv = document.createElement('div');
     descriptionDiv.classList.add('book-description');
     descriptionDiv.innerHTML = `<p>Synopsis:</p><p>${book.description}</p>`;
@@ -104,7 +105,6 @@ function resetPage() {
     // Clear containers / results
     const descriptionContainer = document.getElementById('descriptionContainer');
     descriptionContainer.innerHTML = '';
-
     const resultsContainer = document.getElementById('results');
     resultsContainer.innerHTML = '';
     h1Elem.style.display = 'block';
