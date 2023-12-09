@@ -94,7 +94,7 @@ function createDiv(book) {
     return descriptionDiv;
 }
 
-// Reset / Refresh the page
+// Reset / Refresh
 function resetPage() {
     const searchInputElem = document.getElementById('searchInput');
     const searchButtonElem = document.getElementById('searchButton');
